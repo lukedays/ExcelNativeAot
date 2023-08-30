@@ -7,7 +7,7 @@ The work is preliminary but very promising.
 
 - 100% C# with unmanaged/native methods directly callable by the Excel C API
 - No need for .NET runtimes for deployment
-- Better performance (possibly?)
+- Better performance and/or hot reloading (possibly?)
 
 ### Instructions
 
@@ -21,7 +21,7 @@ The work is preliminary but very promising.
 
 - Visual Studio 2022 17.8.0 Preview 1.0
 - .NET 8.0.100-preview.7.23376.3
-- Microsoft® Excel® 365 (Version 2307) 64-bit 
+- MicrosoftÂ® ExcelÂ® 365 (Version 2307) 64-bit 
 - Windows 11 Home 22H2
 
 ### Todo
