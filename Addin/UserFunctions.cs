@@ -1,15 +1,20 @@
-﻿namespace ExcelNativeAot;
+﻿namespace Addin;
 
 using System.Runtime.InteropServices;
-using static ExcelNativeAot.ExcelConstants;
-using static ExcelNativeAot.ExcelEntryPoints;
+using static Addin.ExcelConstants;
+using static Addin.ExcelEntryPoints;
 
 public static class UserFunctions
 {
+    public static double ManagedAdd(double x, double y)
+    {
+        return x + y;
+    }
+
     [UnmanagedCallersOnly(EntryPoint = nameof(TestAddDouble))]
     public static double TestAddDouble(double x, double y)
     {
-        return x + y;
+        return ManagedAdd(x, y);
     }
 
     [UnmanagedCallersOnly(EntryPoint = nameof(TestConcatString))]

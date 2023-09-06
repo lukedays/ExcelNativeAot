@@ -1,4 +1,4 @@
-﻿namespace ExcelNativeAot;
+﻿namespace Addin;
 
 using System.Runtime.InteropServices;
 

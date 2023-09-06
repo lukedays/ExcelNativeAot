@@ -1,7 +1,7 @@
-﻿namespace ExcelNativeAot;
+﻿namespace Addin;
 
 using System.Runtime.InteropServices;
-using static ExcelNativeAot.ExcelConstants;
+using static Addin.ExcelConstants;
 
 public static class ExcelEntryPoints
 {

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ManagedCaller": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

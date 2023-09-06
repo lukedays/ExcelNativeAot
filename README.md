@@ -12,6 +12,7 @@ The work is preliminary but very promising.
 ### Instructions
 
 - Clone the project
+- Set `Addin` as the starting project if it's not already
 - Debug > Start Debugging by using the `Excel` settings
 - Debug > Attach to Process... and choose `EXCEL.EXE`
 - Open `TestSheet.xlsx`
@@ -37,4 +38,4 @@ The work is preliminary but very promising.
 - [xlOil](https://xloil.readthedocs.io/en/stable/Introduction.html) / [@cunnane](https://github.com/cunnane)
 - [Native AOT samples](https://github.com/dotnet/samples/tree/main/core/nativeaot)
 - [Tutorial for building XLL's starting by the SDK](https://github.com/asavine/xlCppTutorial)
-- Hundreds of StackOverflow pages searching for random C/C++/DllImport/marshalling errors
+- Bing Chat, StackOverflow, etc
