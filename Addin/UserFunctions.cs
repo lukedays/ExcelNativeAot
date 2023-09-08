@@ -1,11 +1,24 @@
 ﻿namespace Addin;
 
+using Addin.ComApi;
 using System.Runtime.InteropServices;
 using static Addin.ExcelConstants;
 using static Addin.ExcelEntryPoints;
 
 public static class UserFunctions
 {
+    //[UnmanagedCallersOnly(EntryPoint = nameof(ComTest))]
+    public static void ComTest()
+    {
+        dynamic excel = new DynamicTest();
+
+        Console.WriteLine(excel.Visible);
+
+        excel.Visible = true;
+
+        Console.WriteLine(excel.Visible);
+    }
+
     public static double ManagedAdd(double x, double y)
     {
         return x + y;
@@ -18,7 +31,7 @@ public static class UserFunctions
     }
 
     [UnmanagedCallersOnly(EntryPoint = nameof(TestConcatString))]
-    public static IntPtr TestConcatString(IntPtr ptr1, IntPtr ptr2)
+    public static nint TestConcatString(nint ptr1, nint ptr2)
     {
         var str1 = ptr1.ToStringUnicode() ?? "";
         var str2 = ptr2.ToStringUnicode() ?? "";
@@ -31,7 +44,7 @@ public static class UserFunctions
         var dllPtr = new xloper12().ToPtr();
 
         // Get DLL name
-        Excel12v(xlGetName, dllPtr, 0, Array.Empty<IntPtr>());
+        Excel12v(xlGetName, dllPtr, 0, Array.Empty<nint>());
 
         // Register test functions
         Excel12v(

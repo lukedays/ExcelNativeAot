@@ -6,7 +6,7 @@ using static Addin.ExcelConstants;
 public static class Marshalling
 {
     // String marshalling
-    public static IntPtr ToXlOper(this string str)
+    public static nint ToXlOper(this string str)
     {
         // Calculate sizes
         var strLen = str.Length + 1;
@@ -28,7 +28,7 @@ public static class Marshalling
         return lpx.ToPtr();
     }
 
-    public static string? ToStringUnicode(this IntPtr ptr)
+    public static string? ToStringUnicode(this nint ptr)
     {
         var xlo = Marshal.PtrToStructure<xloper12>(ptr);
         if (xlo.xltype != xltypeStr)
@@ -39,7 +39,7 @@ public static class Marshalling
     }
 
     // Array marshalling
-    public static IntPtr ToPtr(this IntPtr[] array)
+    public static nint ToPtr(this nint[] array)
     {
         var size = Marshal.SizeOf(array[0]) * array.Length;
 
@@ -51,7 +51,7 @@ public static class Marshalling
     }
 
     // XlOper marshalling
-    public static IntPtr ToPtr(this xloper12 xlo)
+    public static nint ToPtr(this xloper12 xlo)
     {
         var ptr = Marshal.AllocHGlobal(Marshal.SizeOf(xlo));
 

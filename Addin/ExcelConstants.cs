@@ -155,7 +155,7 @@ public static class ExcelConstants
     public struct mref
     {
         /// XLMREF12*
-        public IntPtr lpmref;
+        public nint lpmref;
 
         /// IDSHEET->DWORD_PTR->ULONG_PTR->int
         public int idSheet;
@@ -165,7 +165,7 @@ public static class ExcelConstants
     public struct array
     {
         /// xloper12*
-        public IntPtr lparray;
+        public nint lparray;
 
         /// RW->INT32->int
         public int rows;
@@ -210,11 +210,11 @@ public static class ExcelConstants
     {
         /// BYTE*
         [FieldOffset(0)]
-        public IntPtr lpbData;
+        public nint lpbData;
 
         /// HANDLE->void*
         [FieldOffset(0)]
-        public IntPtr hdata;
+        public nint hdata;
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -235,7 +235,7 @@ public static class ExcelConstants
 
         /// XCHAR*
         [FieldOffset(0)]
-        public IntPtr str;
+        public nint str;
 
         /// BOOL->INT32->int
         [FieldOffset(0)]

@@ -6,16 +6,16 @@ using static Addin.ExcelConstants;
 public static class ExcelEntryPoints
 {
     [DllImport("kernel32.dll")]
-    public static extern IntPtr GetModuleHandle(string lpModuleName);
+    public static extern nint GetModuleHandle(string lpModuleName);
 
     [DllImport("kernel32.dll")]
-    public static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
+    public static extern nint GetProcAddress(nint hModule, string procName);
 
-    public delegate int EXCEL12PROC(int xlfn, int coper, IntPtr[] rgpxloper12, IntPtr xloper12Res);
-    public static IntPtr hmodule;
+    public delegate int EXCEL12PROC(int xlfn, int coper, nint[] rgpxloper12, nint xloper12Res);
+    public static nint hmodule;
     public static EXCEL12PROC pexcel12;
 
-    public static int Excel12v(int xlfn, IntPtr operRes, int count, IntPtr[] opers)
+    public static int Excel12v(int xlfn, nint operRes, int count, nint[] opers)
     {
         FetchExcel12EntryPt();
 
@@ -28,7 +28,7 @@ public static class ExcelEntryPoints
             return;
 
         hmodule = GetModuleHandle(null);
-        if (hmodule == IntPtr.Zero)
+        if (hmodule == nint.Zero)
             return;
 
         pexcel12 = Marshal.GetDelegateForFunctionPointer<EXCEL12PROC>(

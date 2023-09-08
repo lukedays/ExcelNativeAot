@@ -14,12 +14,12 @@ int callLibFunction(char* path, char* funcName)
 {
 	HINSTANCE handle = LoadLibraryA(path);
 
-	typedef double(*myFunc)(double, double);
+	typedef void(*myFunc)();
 	myFunc MyImport = (myFunc)GetProcAddress(handle, funcName);
 
-	double result = MyImport(1, 2);
+	MyImport();
 
-	return result;
+	//return result;
 }
 
 int main()
@@ -30,5 +30,5 @@ int main()
 		return 0;
 	}
 
-    printf("%d", callLibFunction(PathToLibrary, "TestAddDouble"));
+    printf("%d", callLibFunction(PathToLibrary, "ComTest"));
 }
