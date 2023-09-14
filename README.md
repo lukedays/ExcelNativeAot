@@ -9,7 +9,13 @@ The work is preliminary but very promising.
 - No need for .NET runtimes for deployment
 - Better performance and/or hot reloading (possibly?)
 
-### Instructions
+### Instructions for the COM API
+
+- Clone the project
+- Set `ManagedCaller` as the starting project if it's not already
+- Debug > Start Debugging by using the `ManagedCaller` settings
+
+### Instructions for the C API
 
 - Clone the project
 - Set `Addin` as the starting project if it's not already
