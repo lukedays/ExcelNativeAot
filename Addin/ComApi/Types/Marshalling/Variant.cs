@@ -34,8 +34,7 @@ public static class Variant
 
     public static unsafe Types.Managed.Variant ConvertToManaged(Unmanaged.Variant unmanaged)
     {
-        var vt = (VARTYPE)unmanaged.vt;
-        return vt switch
+        return (VARTYPE)unmanaged.vt switch
         {
             VARTYPE.VT_BOOL
                 => new Types.Managed.Variant
