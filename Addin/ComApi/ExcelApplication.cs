@@ -12,7 +12,7 @@ public class ExcelApplication : DynamicObject
     Guid emptyGuid = Guid.Empty;
     bool _verbose = false;
 
-    public ExcelApplication(IDispatch? interfacePtr = null) // IDispatch? interface
+    public ExcelApplication(IDispatch? interfacePtr = null)
     {
         if (interfacePtr != null)
         {
