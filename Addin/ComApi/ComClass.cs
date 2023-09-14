@@ -3,7 +3,7 @@ using static Addin.ComApi.Constants;
 
 namespace Addin.ComApi;
 
-public partial class Activator
+public partial class ComClass
 {
     [LibraryImport("ole32.dll")]
     public static partial int CoCreateInstance(
@@ -14,7 +14,7 @@ public partial class Activator
         out IDispatch ppv
     );
 
-    public static IDispatch ActivateClass(Guid clsid, CLSCTX server)
+    public static IDispatch Create(Guid clsid, CLSCTX server)
     {
         var guid = typeof(IDispatch).GUID;
 

@@ -26,13 +26,13 @@ public partial interface IDispatch
 
     [PreserveSig]
     int Invoke(
-        [MarshalAs(UnmanagedType.I4)] int dispIdMember,
+        int dispIdMember,
         Guid riid,
-        [MarshalAs(UnmanagedType.U4)] uint lcid,
+        uint lcid,
         INVOKEKIND wFlags,
-        [MarshalUsing(typeof(StructMarshalling))] ref Managed.DISPPARAMS pDispParams,
-        [MarshalUsing(typeof(StructMarshalling))] ref Managed.VARIANT pVarResult,
-        [MarshalUsing(typeof(StructMarshalling))] ref Managed.EXCEPINFO pExcepInfo,
+        [MarshalUsing(typeof(Marshalling.DispParams))] ref Managed.DispParams pDispParams,
+        [MarshalUsing(typeof(Marshalling.Variant))] ref Managed.Variant pVarResult,
+        [MarshalUsing(typeof(Marshalling.ExcepInfo))] ref Managed.ExcepInfo pExcepInfo,
         ref uint puArgErr
     );
 }

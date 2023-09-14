@@ -1,6 +1,7 @@
 //#include <windows.h>
 //#include <comdef.h>
 //#include <iostream>
+//#include <atlcomcli.h>
 //
 //int main()
 //{
@@ -40,6 +41,86 @@
 //        if (FAILED(hr)) {
 //            std::cout << "Failed to set Visible property" << std::endl;
 //            return -1;
+//        }
+//
+//        dispid;
+//        LPCOLESTR name = L"Workbooks";
+//        hr = pXlApp->GetIDsOfNames(IID_NULL, (LPOLESTR*)&name, 1, LOCALE_USER_DEFAULT, &dispid);
+//        if (FAILED(hr)) {
+//            printf("Failed to get Workbooks ID\n");
+//            return 1;
+//        }
+//
+//        DISPPARAMS noArgs = { NULL, NULL, 0, 0 };
+//        CComVariant result;
+//        hr = pXlApp->Invoke(dispid, IID_NULL, LOCALE_USER_DEFAULT, DISPATCH_PROPERTYGET, &noArgs, &result, NULL, NULL);
+//        if (FAILED(hr)) {
+//            printf("Failed to get Workbooks object\n");
+//            return 1;
+//        }
+//
+//        CComPtr<IDispatch> pWorkbooks = result.pdispVal;
+//
+//        name = L"Add";
+//        hr = pWorkbooks->GetIDsOfNames(IID_NULL, (LPOLESTR*)&name, 1, LOCALE_USER_DEFAULT, &dispid);
+//        if (FAILED(hr)) {
+//            printf("Failed to get Add method ID\n");
+//            return 1;
+//        }
+//
+//        hr = pWorkbooks->Invoke(dispid, IID_NULL, LOCALE_USER_DEFAULT, DISPATCH_METHOD, &noArgs, &result, NULL, NULL);
+//        if (FAILED(hr)) {
+//            printf("Failed to add workbook\n");
+//            return 1;
+//        }
+//
+//        CComPtr<IDispatch> pWorkbook = result.pdispVal;
+//
+//        name = L"Sheets";
+//        hr = pWorkbook->GetIDsOfNames(IID_NULL, (LPOLESTR*)&name, 1, LOCALE_USER_DEFAULT, &dispid);
+//        if (FAILED(hr)) {
+//            printf("Failed to get Sheets method ID\n");
+//            return 1;
+//        }
+//
+//        hr = pWorkbook->Invoke(dispid, IID_NULL, LOCALE_USER_DEFAULT, DISPATCH_PROPERTYGET, &noArgs, &result, NULL, NULL);
+//        if (FAILED(hr)) {
+//            printf("Failed to get Workbooks object\n");
+//            return 1;
+//        }
+//
+//        CComPtr<IDispatch> pSheets = result.pdispVal;
+//
+//        name = L"Item";
+//        hr = pSheets->GetIDsOfNames(IID_NULL, (LPOLESTR*)&name, 1, LOCALE_USER_DEFAULT, &dispid);
+//        if (FAILED(hr)) {
+//            printf("Failed to get Item method ID\n");
+//            return 1;
+//        }
+//
+//        CComVariant arg(1);  // Index of the first sheet
+//        DISPPARAMS args = { &arg, NULL, 1, 0 };
+//        hr = pSheets->Invoke(dispid, IID_NULL, LOCALE_USER_DEFAULT, DISPATCH_PROPERTYGET, &args, &result, NULL, NULL);
+//        if (FAILED(hr)) {
+//            printf("Failed to get first sheet\n");
+//            return 1;
+//        }
+//
+//        CComPtr<IDispatch> pSheet = result.pdispVal;
+//
+//        name = L"Name";
+//        hr = pSheet->GetIDsOfNames(IID_NULL, (LPOLESTR*)&name, 1, LOCALE_USER_DEFAULT, &dispid);
+//        if (FAILED(hr)) {
+//            printf("Failed to get Name property ID\n");
+//            return 1;
+//        }
+//
+//        CComVariant newName("TestTest");
+//        args = { &newName, NULL, 1, 0 };
+//        hr = pSheet->Invoke(dispid, IID_NULL, LOCALE_USER_DEFAULT, DISPATCH_PROPERTYPUT, &args, &result, NULL, NULL);
+//        if (FAILED(hr)) {
+//            printf("Failed to set sheet name\n");
+//            return 1;
 //        }
 //    }
 //    else {

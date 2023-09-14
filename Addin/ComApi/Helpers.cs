@@ -1,27 +1,9 @@
-﻿using Addin.ComApi.Types.Managed;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace Addin.ComApi
 {
-    internal static class Helpers
+    public static class Helpers
     {
-        public static VARIANT IntToVariant(int val)
-        {
-            return new VARIANT { vt = VARTYPE.VT_I4, lVal = val };
-        }
-
-        public static VARIANT BoolToVariant(bool val)
-        {
-            return new VARIANT { vt = VARTYPE.VT_BOOL, boolVal = val };
-        }
-
-        public static nint StructureToPtr<T>(T str)
-        {
-            var ptr = Marshal.AllocHGlobal(Marshal.SizeOf(str));
-            Marshal.StructureToPtr(str, ptr, false);
-            return ptr;
-        }
-
         public static nint ArrayToPtr<T>(T[] str)
         {
             var size = Marshal.SizeOf<T>();

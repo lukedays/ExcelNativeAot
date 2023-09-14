@@ -1,0 +1,147 @@
+﻿using Addin.ComApi.Types.Managed;
+using System.Dynamic;
+using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
+using static Addin.ComApi.Constants;
+
+namespace Addin.ComApi;
+
+public class ExcelApplication : DynamicObject
+{
+    IDispatch _interfacePtr;
+    Guid emptyGuid = Guid.Empty;
+    bool _verbose = false;
+
+    public ExcelApplication(IDispatch? interfacePtr = null) // IDispatch? interface
+    {
+        if (interfacePtr != null)
+        {
+            _interfacePtr = interfacePtr;
+            return;
+        }
+
+        // The CLSID for Excel.Application (COMView.exe->CLSID table)
+        var clsid = new Guid("{00024500-0000-0000-C000-000000000046}");
+
+        // COMView.exe -> CLSID table -> Type column
+        var server = CLSCTX.CLSCTX_LOCAL_SERVER;
+
+        _interfacePtr = ComClass.Create(clsid, server);
+    }
+
+    public override bool TryGetMember(GetMemberBinder binder, out object? result)
+    {
+        DispParams dispParams = new();
+
+        result = InvokeWrapper(binder.Name, INVOKEKIND.INVOKE_PROPERTYGET, dispParams);
+
+        return true;
+    }
+
+    public override bool TrySetMember(SetMemberBinder binder, object value)
+    {
+        var dispParams = new DispParams
+        {
+            rgvarg = new Variant[] { new Variant(value) },
+            rgdispidNamedArgs = DISPID_PROPERTYPUT,
+            cArgs = 1,
+            cNamedArgs = 1
+        };
+
+        InvokeWrapper(binder.Name, INVOKEKIND.INVOKE_PROPERTYPUT, dispParams);
+
+        return true;
+    }
+
+    public override bool TryGetIndex(GetIndexBinder binder, object[] indexes, out object? result)
+    {
+        var index = (int)indexes[0];
+
+        var dispParams = new DispParams
+        {
+            rgvarg = new Variant[] { new Variant(index) },
+            rgdispidNamedArgs = 0,
+            cArgs = 1,
+            cNamedArgs = 0
+        };
+
+        result = InvokeWrapper("Item", INVOKEKIND.INVOKE_PROPERTYGET, dispParams);
+
+        return true;
+    }
+
+    public override bool TrySetIndex(SetIndexBinder binder, object[] indexes, object value)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override bool TryInvokeMember(
+        InvokeMemberBinder binder,
+        object[] args,
+        out object result
+    )
+    {
+        DispParams dispParams = new();
+
+        result = InvokeWrapper(binder.Name, INVOKEKIND.INVOKE_FUNC, dispParams);
+
+        return true;
+    }
+
+    private object InvokeWrapper(string propName, INVOKEKIND kind, DispParams dispParams)
+    {
+        var dispIds = GetDispIDs(propName);
+
+        ExcepInfo pExcepInfo = new();
+        Variant pVarResult = new();
+        uint puArgErr = 0;
+
+        var hr = _interfacePtr.Invoke(
+            dispIds[0],
+            emptyGuid,
+            LOCALE_USER_DEFAULT,
+            kind,
+            ref dispParams,
+            ref pVarResult,
+            ref pExcepInfo,
+            ref puArgErr
+        );
+
+        Marshal.ThrowExceptionForHR(hr);
+
+        // Found an IDispatch object - swap current instance
+        if (pVarResult.Value is IDispatch interfacePtr)
+        {
+            return new ExcelApplication(interfacePtr);
+        }
+
+        return pVarResult.Value;
+    }
+
+    private int[] GetDispIDs(string propName)
+    {
+        var names = new string[] { propName };
+
+        var dispIds = new int[names.Length];
+        var hr = _interfacePtr.GetIDsOfNames(
+            ref emptyGuid,
+            names,
+            (uint)names.Length,
+            LOCALE_USER_DEFAULT,
+            dispIds
+        );
+
+        if (hr < 0)
+        {
+            Marshal.ThrowExceptionForHR(hr);
+        }
+
+        if (_verbose)
+        {
+            for (int i = 0; i < names.Length; i++)
+                Console.WriteLine($"{names[i]}: {dispIds[i]}");
+        }
+
+        return dispIds;
+    }
+}

@@ -3,10 +3,10 @@
 namespace Addin.ComApi.Types.Unmanaged;
 
 [StructLayout(LayoutKind.Explicit)]
-public struct VARIANT
+public struct Variant
 {
     [FieldOffset(0)]
-    public Managed.DECIMAL decVal;
+    public DECIMAL decVal;
 
     [FieldOffset(0)]
     public ushort vt;
@@ -48,7 +48,7 @@ public struct VARIANT
     public int scode;
 
     [FieldOffset(8)]
-    public Managed.CY cyVal;
+    public CY cyVal;
 
     [FieldOffset(8)]
     public double date;
@@ -156,5 +156,53 @@ public struct VARIANT
     public nint puintVal;
 
     [FieldOffset(8)]
-    public Managed.__tagBRECORD __tagBRECORD;
+    public __tagBRECORD __tagBRECORD;
+}
+
+[StructLayout(LayoutKind.Explicit)]
+public struct CY
+{
+    [FieldOffset(0)]
+    public uint Lo;
+
+    [FieldOffset(4)]
+    public int Hi;
+
+    [FieldOffset(0)]
+    public long int64;
+}
+
+[StructLayout(LayoutKind.Sequential)]
+public struct __tagBRECORD
+{
+    public nint pvRecord;
+    public nint pRecInfo;
+}
+
+[StructLayout(LayoutKind.Explicit)]
+public struct DECIMAL
+{
+    [FieldOffset(0)]
+    public ushort wReserved;
+
+    [FieldOffset(2)]
+    public ushort signscale;
+
+    [FieldOffset(2)]
+    public byte scale;
+
+    [FieldOffset(3)]
+    public byte sign;
+
+    [FieldOffset(4)]
+    public uint Hi32;
+
+    [FieldOffset(8)]
+    public ulong Lo64;
+
+    [FieldOffset(8)]
+    public uint Lo32;
+
+    [FieldOffset(12)]
+    public uint Mid32;
 }

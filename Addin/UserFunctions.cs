@@ -1,22 +1,33 @@
 ﻿namespace Addin;
 
+using Addin.CApi;
 using Addin.ComApi;
 using System.Runtime.InteropServices;
-using static Addin.ExcelConstants;
-using static Addin.ExcelEntryPoints;
+using static Addin.CApi.ExcelConstants;
+using static Addin.CApi.ExcelEntryPoints;
 
 public static class UserFunctions
 {
-    //[UnmanagedCallersOnly(EntryPoint = nameof(ComTest))]
-    public static void ComTest()
+    //[UnmanagedCallersOnly(EntryPoint = nameof(ComTest))] // TODO: call from unmanaged code
+    public static unsafe void ComTest()
     {
-        dynamic excel = new DynamicTest();
+        dynamic app = new ExcelApplication();
 
-        Console.WriteLine(excel.Visible);
+        Console.WriteLine($"Version: {app.Version}");
 
-        excel.Visible = true;
+        Console.WriteLine($"Visible: {app.Visible}");
 
-        Console.WriteLine(excel.Visible);
+        app.Visible = true;
+
+        Console.WriteLine($"Visible: {app.Visible}");
+
+        var wb = app.Workbooks.Add();
+
+        Console.WriteLine($"Name: {wb.Sheets[1].Name}");
+
+        wb.Sheets[1].Name = "FirstSheet";
+
+        Console.WriteLine($"Name: {wb.Sheets[1].Name}");
     }
 
     public static double ManagedAdd(double x, double y)

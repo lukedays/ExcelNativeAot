@@ -1,4 +1,4 @@
-﻿namespace Addin;
+﻿namespace Addin.CApi;
 
 using System.Runtime.InteropServices;
 
@@ -63,7 +63,7 @@ public static class ExcelConstants
     public static readonly int xlbitXLFree = 0x1000;
     public static readonly int xlbitDLLFree = 0x4000;
 
-    public static readonly int xltypeBigData = (xltypeStr | xltypeInt);
+    public static readonly int xltypeBigData = xltypeStr | xltypeInt;
 
     // Error codes
     // Used for val.err field of XLOPER and XLOPER12 structures

@@ -1,7 +1,7 @@
-﻿namespace Addin;
+﻿namespace Addin.CApi;
 
 using System.Runtime.InteropServices;
-using static Addin.ExcelConstants;
+using static Addin.CApi.ExcelConstants;
 
 public static class Marshalling
 {

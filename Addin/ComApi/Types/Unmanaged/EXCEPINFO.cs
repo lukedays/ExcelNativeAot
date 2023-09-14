@@ -3,7 +3,7 @@
 namespace Addin.ComApi.Types.Unmanaged;
 
 [StructLayout(LayoutKind.Sequential)]
-public struct EXCEPINFO
+public struct ExcepInfo
 {
     public short wCode;
     public short wReserved;

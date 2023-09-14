@@ -1,6 +1,6 @@
 ﻿namespace Addin.ComApi.Types.Managed;
 
-public struct EXCEPINFO
+public struct ExcepInfo
 {
     //
     // Summary:

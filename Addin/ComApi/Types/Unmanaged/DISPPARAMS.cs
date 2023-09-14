@@ -3,7 +3,7 @@
 namespace Addin.ComApi.Types.Unmanaged;
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct DISPPARAMS
+public unsafe struct DispParams
 {
     public nint rgvarg;
     public int* rgdispidNamedArgs;
