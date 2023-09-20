@@ -1,12 +1,11 @@
 ﻿using System.Runtime.InteropServices.Marshalling;
-using Unmanaged = Addin.ComApi.Types.Unmanaged;
 
-namespace Addin.ComApi.Marshalling;
+namespace Addin.Types.Marshalling;
 
-[CustomMarshaller(typeof(Types.Managed.DispParams), MarshalMode.Default, typeof(DispParams))]
-public static partial class DispParams
+[CustomMarshaller(typeof(Managed.DispParams), MarshalMode.Default, typeof(DispParams))]
+public static class DispParams
 {
-    public static unsafe Unmanaged.DispParams ConvertToUnmanaged(Types.Managed.DispParams managed)
+    public static unsafe Unmanaged.DispParams ConvertToUnmanaged(Managed.DispParams managed)
     {
         return new Unmanaged.DispParams
         {
@@ -15,21 +14,19 @@ public static partial class DispParams
             rgdispidNamedArgs = &managed.rgdispidNamedArgs,
             rgvarg =
                 managed.rgvarg != null
-                    ? Helpers.ArrayToPtr(
-                        managed.rgvarg.Select(Variant.ConvertToUnmanaged).ToArray()
-                    )
+                    ? Array.ArrayToPtr(managed.rgvarg.Select(Variant.ConvertToUnmanaged).ToArray())
                     : nint.Zero
         };
     }
 
-    public static unsafe Types.Managed.DispParams ConvertToManaged(Unmanaged.DispParams unmanaged)
+    public static unsafe Managed.DispParams ConvertToManaged(Unmanaged.DispParams unmanaged)
     {
-        return new Types.Managed.DispParams
+        return new Managed.DispParams
         {
             cArgs = unmanaged.cArgs,
             cNamedArgs = unmanaged.cNamedArgs,
             rgdispidNamedArgs = *unmanaged.rgdispidNamedArgs,
-            rgvarg = Helpers
+            rgvarg = Array
                 .PtrToArray<Unmanaged.Variant>(unmanaged.rgvarg, unmanaged.cArgs)
                 .Select(Variant.ConvertToManaged)
                 .ToArray(),

@@ -1,8 +1,9 @@
-﻿using Addin.ComApi.Types.Managed;
+﻿using Addin.Types.Managed;
 using System.Dynamic;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
-using static Addin.ComApi.Constants;
+using static Addin.Types.Unmanaged.ComConstants;
+using Unmanaged = Addin.Types.Unmanaged;
 
 namespace Addin.ComApi;
 
@@ -24,7 +25,7 @@ public class ExcelApplication : DynamicObject
         var clsid = new Guid("{00024500-0000-0000-C000-000000000046}");
 
         // COMView.exe -> CLSID table -> Type column
-        var server = CLSCTX.CLSCTX_LOCAL_SERVER;
+        var server = Unmanaged.ClsCtx.CLSCTX_LOCAL_SERVER;
 
         _interfacePtr = ComClass.Create(clsid, server);
     }
@@ -49,7 +50,7 @@ public class ExcelApplication : DynamicObject
     {
         var dispParams = new DispParams
         {
-            rgvarg = new Variant[] { new Variant(value) },
+            rgvarg = [new Variant(value)],
             rgdispidNamedArgs = DISPID_PROPERTYPUT,
             cArgs = 1,
             cNamedArgs = 1
@@ -66,7 +67,7 @@ public class ExcelApplication : DynamicObject
 
         var dispParams = new DispParams
         {
-            rgvarg = new Variant[] { new Variant(index) },
+            rgvarg = [new Variant(index)],
             rgdispidNamedArgs = 0,
             cArgs = 1,
             cNamedArgs = 0

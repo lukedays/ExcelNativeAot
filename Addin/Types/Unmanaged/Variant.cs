@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Addin.ComApi.Types.Unmanaged;
+namespace Addin.Types.Unmanaged;
 
 [StructLayout(LayoutKind.Explicit)]
 public struct Variant

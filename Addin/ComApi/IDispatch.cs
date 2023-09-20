@@ -1,7 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.InteropServices.Marshalling;
-using Managed = Addin.ComApi.Types.Managed;
+using Managed = Addin.Types.Managed;
+using Marshalling = Addin.Types.Marshalling;
 
 namespace Addin.ComApi;
 

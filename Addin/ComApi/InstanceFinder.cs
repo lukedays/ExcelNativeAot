@@ -1,8 +1,9 @@
 ﻿using Addin.CApi;
+using Addin.Types.Unmanaged;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
-using static Addin.CApi.ExcelConstants;
 using static Addin.CApi.ExcelEntryPoints;
+using static Addin.Types.Unmanaged.ExcelConstants;
 
 namespace Addin.ComApi;
 
@@ -50,7 +51,7 @@ internal static partial class InstanceFinder
             var guid = typeof(IDispatch).GUID;
             var hr = AccessibleObjectFromWindow(
                 hwndChild,
-                Constants.OBJID_NATIVEOM,
+                ComConstants.OBJID_NATIVEOM,
                 guid,
                 out nint excelWindowPtr
             );

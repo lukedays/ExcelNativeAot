@@ -1,7 +1,7 @@
 ﻿namespace Addin.CApi;
 
 using System.Runtime.InteropServices;
-using static Addin.CApi.ExcelConstants;
+using static Addin.Types.Unmanaged.ExcelConstants;
 
 public static partial class ExcelEntryPoints
 {

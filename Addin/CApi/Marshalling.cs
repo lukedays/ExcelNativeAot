@@ -1,7 +1,8 @@
 ﻿namespace Addin.CApi;
 
+using Addin.Types.Unmanaged;
 using System.Runtime.InteropServices;
-using static Addin.CApi.ExcelConstants;
+using static Addin.Types.Unmanaged.ExcelConstants;
 
 public static class Marshalling
 {

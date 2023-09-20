@@ -1,4 +1,4 @@
-﻿namespace Addin.ComApi.Types.Managed;
+﻿namespace Addin.Types.Managed;
 
 public struct ExcepInfo
 {

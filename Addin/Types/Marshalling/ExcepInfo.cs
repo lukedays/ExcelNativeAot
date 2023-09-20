@@ -1,13 +1,12 @@
 ﻿using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
-using Unmanaged = Addin.ComApi.Types.Unmanaged;
 
-namespace Addin.ComApi.Marshalling;
+namespace Addin.Types.Marshalling;
 
-[CustomMarshaller(typeof(Types.Managed.ExcepInfo), MarshalMode.Default, typeof(ExcepInfo))]
-public static partial class ExcepInfo
+[CustomMarshaller(typeof(Managed.ExcepInfo), MarshalMode.Default, typeof(ExcepInfo))]
+public static class ExcepInfo
 {
-    public static Unmanaged.ExcepInfo ConvertToUnmanaged(Types.Managed.ExcepInfo managed)
+    public static Unmanaged.ExcepInfo ConvertToUnmanaged(Managed.ExcepInfo managed)
     {
         return new Unmanaged.ExcepInfo
         {
@@ -23,9 +22,9 @@ public static partial class ExcepInfo
         };
     }
 
-    public static Types.Managed.ExcepInfo ConvertToManaged(Unmanaged.ExcepInfo unmanaged)
+    public static Managed.ExcepInfo ConvertToManaged(Unmanaged.ExcepInfo unmanaged)
     {
-        return new Types.Managed.ExcepInfo
+        return new Managed.ExcepInfo
         {
             bstrDescription =
                 unmanaged.bstrDescription != 0

@@ -1,8 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Addin.ComApi;
+namespace Addin.Types.Marshalling;
 
-public static class Helpers
+public static class Array
 {
     public static nint ArrayToPtr<T>(T[] str)
     {

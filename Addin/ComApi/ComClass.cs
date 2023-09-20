@@ -1,5 +1,5 @@
-﻿using System.Runtime.InteropServices;
-using static Addin.ComApi.Constants;
+﻿using Addin.Types.Unmanaged;
+using System.Runtime.InteropServices;
 
 namespace Addin.ComApi;
 
@@ -9,12 +9,12 @@ public partial class ComClass
     public static partial int CoCreateInstance(
         ref Guid rclsid,
         nint pUnkOuter,
-        CLSCTX dwClsContext,
+        ClsCtx dwClsContext,
         ref Guid riid,
         out IDispatch ppv
     );
 
-    public static IDispatch Create(Guid clsid, CLSCTX server)
+    public static IDispatch Create(Guid clsid, ClsCtx server)
     {
         var guid = typeof(IDispatch).GUID;
 

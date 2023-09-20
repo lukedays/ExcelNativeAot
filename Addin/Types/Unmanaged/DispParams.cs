@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Addin.ComApi.Types.Unmanaged;
+namespace Addin.Types.Unmanaged;
 
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct DispParams
