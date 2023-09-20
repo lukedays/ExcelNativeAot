@@ -1,15 +1,14 @@
-﻿using Addin.Types.Managed;
+﻿using Addin.CApi;
+using Addin.Types.Managed;
 using Addin.Types.Unmanaged;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
-using static Addin.CApi.ExcelEntryPoints;
-using static Addin.Types.Unmanaged.ExcelConstants;
 
 namespace Addin.ComApi;
 
-internal static partial class InstanceFinder
+public static partial class ExcelComApi
 {
-    public static unsafe ExcelObject? GetCurrentExcelInstance()
+    public static unsafe ExcelObject? GetApplication()
     {
         // Initialize COM
         CoInitialize(nint.Zero);
@@ -17,7 +16,7 @@ internal static partial class InstanceFinder
         // Get the pointer to the current Excel window handler
         var hwndPtr = new XlOper().ToPtr();
 
-        Excel12v(xlGetHwnd, hwndPtr, 0, []);
+        ExcelCApi.Excel12v(ExcelConstants.xlGetHwnd, hwndPtr, 0, []);
 
         var hwnd = Marshal.ReadIntPtr(hwndPtr);
 

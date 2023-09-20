@@ -3,7 +3,7 @@
 using Addin.ComApi;
 using Addin.Types.Managed;
 using System.Runtime.InteropServices;
-using static Addin.CApi.ExcelEntryPoints;
+using static Addin.CApi.ExcelCApi;
 using static Addin.Types.Unmanaged.ExcelConstants;
 
 public static class UserFunctions
@@ -11,7 +11,7 @@ public static class UserFunctions
     [UnmanagedCallersOnly(EntryPoint = nameof(TestVersion))]
     public static unsafe nint TestVersion()
     {
-        var app = InstanceFinder.GetCurrentExcelInstance();
+        var app = ExcelComApi.GetApplication();
 
         var version = app.GetProperty("Version") as string; // This works
 

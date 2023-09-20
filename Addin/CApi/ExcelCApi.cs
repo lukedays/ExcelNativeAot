@@ -1,10 +1,19 @@
 ﻿namespace Addin.CApi;
 
+using Addin.Types.Unmanaged;
 using System.Runtime.InteropServices;
-using static Addin.Types.Unmanaged.ExcelConstants;
 
-public static partial class ExcelEntryPoints
+public static partial class ExcelCApi
 {
+    public static int Excel12v(int xlfn, nint operRes, int count, nint[] opers)
+    {
+        FetchExcel12EntryPt();
+
+        return pexcel12 == null
+            ? ExcelConstants.xlretFailed
+            : pexcel12(xlfn, count, opers, operRes);
+    }
+
     [LibraryImport("kernel32.dll")]
     public static partial nint GetModuleHandleW(
         [MarshalAs(UnmanagedType.LPWStr)] string lpModuleName
@@ -19,13 +28,6 @@ public static partial class ExcelEntryPoints
     public delegate int EXCEL12PROC(int xlfn, int coper, nint[] rgpxloper12, nint xloper12Res);
     public static nint hmodule;
     public static EXCEL12PROC pexcel12;
-
-    public static int Excel12v(int xlfn, nint operRes, int count, nint[] opers)
-    {
-        FetchExcel12EntryPt();
-
-        return pexcel12 == null ? xlretFailed : pexcel12(xlfn, count, opers, operRes);
-    }
 
     public static void FetchExcel12EntryPt()
     {
