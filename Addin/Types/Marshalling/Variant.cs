@@ -2,7 +2,6 @@
 using Addin.Types.Unmanaged;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
-using static Addin.Types.Unmanaged.ComConstants;
 
 namespace Addin.Types.Marshalling;
 

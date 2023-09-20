@@ -1,8 +1,7 @@
 ﻿namespace Addin;
 
-using Addin.CApi;
 using Addin.ComApi;
-using Addin.Types.Unmanaged;
+using Addin.Types.Managed;
 using System.Runtime.InteropServices;
 using static Addin.CApi.ExcelEntryPoints;
 using static Addin.Types.Unmanaged.ExcelConstants;
@@ -16,7 +15,7 @@ public static class UserFunctions
 
         var version = app.GetProperty("Version") as string;
 
-        return version.ToXlOper();
+        return new XlOper(version).ToPtr();
     }
 
     [UnmanagedCallersOnly(EntryPoint = nameof(TestAddDouble))]
@@ -28,15 +27,15 @@ public static class UserFunctions
     [UnmanagedCallersOnly(EntryPoint = nameof(TestConcatString))]
     public static nint TestConcatString(nint ptr1, nint ptr2)
     {
-        var str1 = ptr1.ToStringUnicode() ?? "";
-        var str2 = ptr2.ToStringUnicode() ?? "";
-        return (str1 + str2).ToXlOper();
+        var str1 = new XlOper(ptr1).ToString() ?? "";
+        var str2 = new XlOper(ptr2).ToString() ?? "";
+        return new XlOper(str1 + str2).ToPtr();
     }
 
     [UnmanagedCallersOnly(EntryPoint = nameof(xlAutoOpen))]
     public static int xlAutoOpen()
     {
-        var dllPtr = new xloper12().ToPtr();
+        var dllPtr = new XlOper().ToPtr();
 
         // Get DLL name
         Excel12v(xlGetName, dllPtr, 0, []);
@@ -48,9 +47,9 @@ public static class UserFunctions
             4,
             [
                 dllPtr,
-                nameof(TestAddDouble).ToXlOper(),
-                "BBB".ToXlOper(),
-                nameof(TestAddDouble).ToXlOper()
+                new XlOper(nameof(TestAddDouble)).ToPtr(),
+                new XlOper("BBB").ToPtr(),
+                new XlOper(nameof(TestAddDouble)).ToPtr(),
             ]
         );
 
@@ -60,9 +59,9 @@ public static class UserFunctions
             4,
             [
                 dllPtr,
-                nameof(TestConcatString).ToXlOper(),
-                "QQQ".ToXlOper(),
-                nameof(TestConcatString).ToXlOper()
+                new XlOper(nameof(TestConcatString)).ToPtr(),
+                new XlOper("QQQ").ToPtr(),
+                new XlOper(nameof(TestConcatString)).ToPtr(),
             ]
         );
 
@@ -70,7 +69,7 @@ public static class UserFunctions
             xlfRegister,
             0,
             4,
-            [dllPtr, nameof(TestVersion).ToXlOper(), "Q".ToXlOper(), nameof(TestVersion).ToXlOper()]
+            [dllPtr, new XlOper(nameof(TestVersion)).ToPtr(), new XlOper("Q").ToPtr(), new XlOper(nameof(TestVersion)).ToPtr()]
         );
 
         // Free the handler

@@ -7,13 +7,13 @@ using Unmanaged = Addin.Types.Unmanaged;
 
 namespace Addin.ComApi;
 
-public class ExcelApplication : DynamicObject
+public class ExcelObject : DynamicObject
 {
     IDispatch _interfacePtr;
     Guid emptyGuid = Guid.Empty;
     bool _verbose;
 
-    public ExcelApplication(IDispatch? interfacePtr = null)
+    public ExcelObject(IDispatch? interfacePtr = null)
     {
         if (interfacePtr != null)
         {
@@ -120,7 +120,7 @@ public class ExcelApplication : DynamicObject
         // Found an IDispatch object - swap current instance
         if (pVarResult.Value is IDispatch interfacePtr)
         {
-            return new ExcelApplication(interfacePtr);
+            return new ExcelObject(interfacePtr);
         }
 
         return pVarResult.Value;

@@ -1,4 +1,4 @@
-﻿using Addin.CApi;
+﻿using Addin.Types.Managed;
 using Addin.Types.Unmanaged;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -9,13 +9,13 @@ namespace Addin.ComApi;
 
 internal static partial class InstanceFinder
 {
-    public static unsafe ExcelApplication? GetCurrentExcelInstance()
+    public static unsafe ExcelObject? GetCurrentExcelInstance()
     {
         // Initialize COM
         CoInitialize(nint.Zero);
 
         // Get the pointer to the current Excel window handler
-        var hwndPtr = new xloper12().ToPtr();
+        var hwndPtr = new XlOper().ToPtr();
 
         Excel12v(xlGetHwnd, hwndPtr, 0, []);
 
@@ -28,9 +28,9 @@ internal static partial class InstanceFinder
 
         // Convert to a managed IDispatch
         var excelWindow = ComInterfaceMarshaller<IDispatch>.ConvertToManaged((void*)excelWindowPtr);
-        var excelWindowWrapper = new ExcelApplication(excelWindow);
+        var excelWindowWrapper = new ExcelObject(excelWindow);
 
-        return excelWindowWrapper.GetProperty("Application") as ExcelApplication;
+        return excelWindowWrapper.GetProperty("Application") as ExcelObject;
     }
 
     [LibraryImport("oleacc.dll")]
