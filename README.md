@@ -1,12 +1,11 @@
 ## Excel Native AOT
 
-Proof-of-concept of using the newly announced .NET Native AOT (Ahead-of-time) compilation features to build Excel XLL add-ins.
-The work is preliminary but very promising.
+Proof-of-concept of using .NET Native AOT (ahead-of-time) compilation features to build Excel XLL add-ins.
 
 ### Features
 
 - 100% C# with unmanaged/native methods directly callable by Excel (the C/C++ projects are used just for debugging)
-- Access to the C/XLL and COM APIs
+- Access to the C/XLL (through `UnmanagedCallersOnly`) and COM APIs (through `GeneratedComInterface`)
 - No need for .NET runtimes for deployment
 - Better performance and/or hot reloading (possibly?)
 
@@ -28,7 +27,6 @@ The work is preliminary but very promising.
 
 - Add all possible XlOper types
 - Use code generation to wrap marshalling of variables and method generation
-- Integrate into an existing project (candidates? Govert...?) or create a separate NuGet
 
 ### Credits
 
