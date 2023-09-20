@@ -3,13 +3,18 @@
 using System.Runtime.InteropServices;
 using static Addin.CApi.ExcelConstants;
 
-public static class ExcelEntryPoints
+public static partial class ExcelEntryPoints
 {
-    [DllImport("kernel32.dll")]
-    public static extern nint GetModuleHandle(string lpModuleName);
+    [LibraryImport("kernel32.dll")]
+    public static partial nint GetModuleHandleW(
+        [MarshalAs(UnmanagedType.LPWStr)] string lpModuleName
+    );
 
-    [DllImport("kernel32.dll")]
-    public static extern nint GetProcAddress(nint hModule, string procName);
+    [LibraryImport("kernel32.dll")]
+    public static partial nint GetProcAddress(
+        nint hModule,
+        [MarshalAs(UnmanagedType.LPStr)] string procName
+    );
 
     public delegate int EXCEL12PROC(int xlfn, int coper, nint[] rgpxloper12, nint xloper12Res);
     public static nint hmodule;
@@ -27,7 +32,7 @@ public static class ExcelEntryPoints
         if (pexcel12 != null)
             return;
 
-        hmodule = GetModuleHandle(null);
+        hmodule = GetModuleHandleW(null);
         if (hmodule == nint.Zero)
             return;
 

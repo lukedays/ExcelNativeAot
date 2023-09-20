@@ -30,5 +30,5 @@ int main()
 		return 0;
 	}
 
-    printf("%d", callLibFunction(PathToLibrary, "ComTest"));
+    printf("%d", callLibFunction(PathToLibrary, "TestVersion"));
 }

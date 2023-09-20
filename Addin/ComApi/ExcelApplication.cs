@@ -10,7 +10,7 @@ public class ExcelApplication : DynamicObject
 {
     IDispatch _interfacePtr;
     Guid emptyGuid = Guid.Empty;
-    bool _verbose = false;
+    bool _verbose;
 
     public ExcelApplication(IDispatch? interfacePtr = null)
     {
@@ -27,6 +27,13 @@ public class ExcelApplication : DynamicObject
         var server = CLSCTX.CLSCTX_LOCAL_SERVER;
 
         _interfacePtr = ComClass.Create(clsid, server);
+    }
+
+    public object? GetProperty(string name)
+    {
+        DispParams dispParams = new();
+
+        return InvokeWrapper(name, INVOKEKIND.INVOKE_PROPERTYGET, dispParams);
     }
 
     public override bool TryGetMember(GetMemberBinder binder, out object? result)
@@ -88,7 +95,7 @@ public class ExcelApplication : DynamicObject
         return true;
     }
 
-    private object InvokeWrapper(string propName, INVOKEKIND kind, DispParams dispParams)
+    public object InvokeWrapper(string propName, INVOKEKIND kind, DispParams dispParams)
     {
         var dispIds = GetDispIDs(propName);
 

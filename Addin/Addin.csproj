@@ -18,4 +18,9 @@
     <Exec Command="dotnet publish --no-build -r win-x64 -c Debug" />
   </Target>
 
+	<ItemGroup>
+		<DirectPInvoke Include="ole32" />
+		<DirectPInvoke Include="kernel32" />
+	</ItemGroup>
+
 </Project>
