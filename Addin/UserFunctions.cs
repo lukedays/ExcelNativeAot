@@ -13,7 +13,9 @@ public static class UserFunctions
     {
         var app = InstanceFinder.GetCurrentExcelInstance();
 
-        var version = app.GetProperty("Version") as string;
+        var version = app.GetProperty("Version") as string; // This works
+
+        //var version = (app as dynamic).Version as string; // Doesn't work
 
         return new XlOper(version).ToPtr();
     }
