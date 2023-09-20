@@ -5,22 +5,15 @@ The work is preliminary but very promising.
 
 ### Features
 
-- 100% C# with unmanaged/native methods directly callable by the Excel C API
+- 100% C# with unmanaged/native methods directly callable by Excel (the C/C++ projects are used just for debugging)
+- Access to the C/XLL and COM APIs
 - No need for .NET runtimes for deployment
 - Better performance and/or hot reloading (possibly?)
 
-### Instructions for the COM API
+### Instructions
 
 - Clone the project
-- Set `ManagedCaller` as the starting project if it's not already
-- Debug > Start Debugging by using the `ManagedCaller` settings
-
-### Instructions for the C API
-
-- Clone the project
-- Set `Addin` as the starting project if it's not already
-- Debug > Start Debugging by using the `Excel` settings
-- Debug > Attach to Process... and choose `EXCEL.EXE`
+- Set `ExcelNativeDebugger` as the starting project if it's not already
 - Open `TestSheet.xlsx`
 - Tweak settings/paths if necessary
 
@@ -36,7 +29,6 @@ The work is preliminary but very promising.
 - Add all possible XlOper types
 - Use code generation to wrap marshalling of variables and method generation
 - Integrate into an existing project (candidates? Govert...?) or create a separate NuGet
-- Find a way to auto-attach to the Excel process...
 
 ### Credits
 
